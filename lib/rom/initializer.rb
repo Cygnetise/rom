@@ -19,7 +19,9 @@ module ROM
       #
       # @api public
       def options
-        @__options__
+        @__options__ ||= self.class.dry_initializer.definitions.values.each_with_object({}) do |item, obj|
+          obj[item.target] = instance_variable_get(item.ivar)
+        end
       end
     end
   end
