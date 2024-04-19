@@ -43,7 +43,7 @@ require "rom/memory"
 
 class Users < ROM::Relation[:memory]
   schema do
-    attribute :id, Types::Int
+    attribute :id, Types::Integer
     attribute :name, Types::String
     
     primary_key :id
@@ -56,8 +56,8 @@ end
 
 class Tasks < ROM::Relation[:memory]
   schema do
-    attribute :id, Types::Int
-    attribute :user_id, Types::Int
+    attribute :id, Types::Integer
+    attribute :user_id, Types::Integer
     attribute :title, Types::String
     
     primary_key :id
