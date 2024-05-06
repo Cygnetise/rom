@@ -81,12 +81,18 @@ module ROM
     # Base composite class with left-to-right pipeline behavior
     #
     # @api private
-    class Composite
-      (Kernel.private_instance_methods - %i[respond_to_missing? block_given?])
-        .each(&method(:undef_method))
+    class Composite < ::BasicObject
+      %i[block_given? respond_to_missing?].each do |method|
+        define_method(method, ::Kernel.instance_method(method))
+        private method
+      end
 
-      include Dry::Equalizer(:left, :right)
-      include Proxy
+      %i[class to_s inspect is_a? instance_of? to_enum].each do |method|
+        define_method(method, ::Kernel.instance_method(method))
+      end
+
+      include ::Dry::Equalizer(:left, :right)
+      include ::ROM::Pipeline::Proxy
 
       # @api private
       attr_reader :left
