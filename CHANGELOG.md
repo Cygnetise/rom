@@ -60,7 +60,17 @@ a couple of extra steps required for the upgrade.
 - [internal] `ROM.plugin_registry` is deprecated, use `ROM.plugins` instead (via #660) (@solnic)
 - [REVISIT] configuring custom gateway for a relation via DSL requires passing it as an option rather than specifying it within the block. It kinda-worked previously because the adapter was defaulting to the first one found. I'm quite sure this was more like a bug than a feature. This behavior could be restored in rom/compat though - it's a matter of defaulting to the first adapter found when gateway was not explicitly specified, meaning the new default should be set to `Undefined` rather than `:default` so that we can detect when it was not specified and act accordingly. This will only make sense when there's just *one adapter available* (via bedb330f0ec195d9acacf4481dad3a705e8a36af) (@solnic)
 
-[Compare v5.3.1...v6.0.0.alpha1](https://github.com/rom-rb/rom/compare/v5.3.1...v6.0.0.alpha1)
+[Compare v5.3.2...v6.0.0.alpha1](https://github.com/rom-rb/rom/compare/v5.3.2...v6.0.0.alpha1)
+
+## 5.3.2 2024-05-06
+
+
+### Fixed
+
+- [rom-core] another fix caused by `Object#with` from ActiveSupport 7.1 (@flash-gordon)
+
+
+[Compare v5.3.1...v5.3.2](https://github.com/rom-rb/rom/compare/v5.3.1...v5.3.2)
 
 ## 5.3.1 2024-03-15
 
