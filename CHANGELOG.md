@@ -1,3 +1,11 @@
+## 5.3.2 2024-05-06
+
+### Fixed
+
+- [rom-core] another fix caused by `Object#with` from ActiveSupport 7.1 (@flash-gordon)
+
+[Compare v5.3.1...v5.3.2](https://github.com/rom-rb/rom/compare/v5.3.1...v5.3.2)
+
 ## 5.3.1 2024-03-15
 
 ### Changed
