@@ -94,6 +94,10 @@
     rather than `:default` so that we can detect when it was not specified and act
     accordingly. This will only make sense when there's just *one adapter available*
     (via bedb330f0ec195d9acacf4481dad3a705e8a36af) (@solnic)"
+- version: 5.3.2
+  date: '2024-05-06'
+  fixed:
+    - "[rom-core] another fix caused by `Object#with` from ActiveSupport 7.1 (@flash-gordon)"
 - version: 5.3.1
   date: '2024-03-15'
   changed:
