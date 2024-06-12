@@ -33,6 +33,8 @@ module ROM
   #   end
   #
   #   class UserRepo < ROM::Repository[:users]
+  #     schema(infer: true)
+  #     auto_struct true
   #   end
   #
   #   user_repo = UserRepo.new(rom)
@@ -43,11 +45,11 @@ module ROM
   #
   #   # see struct's schema attributes
   #
-  #   # model.schema.key(:id)
-  #   # => #<Dry::Types[id: Nominal<Integer meta={primary_key: true, source: :users}>]>
+  #   model.schema.key(:id)
+  #   # => #<Dry::Types[id: Nominal<Integer meta={primary_key: true, alias: nil, source: :users}>]>
   #
   #   model.schema[:name]
-  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String> meta={source: :users}>]>
+  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String meta={alias: nil, source: :users}> meta={alias: nil, source: :users}>]>
   #
   # @example passing a namespace with an existing parent class
   #   module Entities
@@ -63,6 +65,7 @@ module ROM
   #   end
   #
   #   user_repo = UserRepo.new(rom)
+  #   user_repo.users.insert(name: "Jane")
   #   user = user_repo.users.by_pk(1).one!
   #   user.name # => "Jane"
   #   user.upcased_name # => "JANE"
