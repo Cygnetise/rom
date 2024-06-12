@@ -17,9 +17,10 @@ module ROM
   # about attribute types returned from relations, thus can be introspected to build
   # additional functionality when desired.
   #
-  # There is a caveat you should know about when working with structs. Struct classes
-  # have names but at the same time they're anonymous, i.e. you can't get the User struct class
-  # with ROM::Struct::User. ROM will create as many struct classes for User as needed,
+  # *NOTE*: There is a caveat you should know about when working with ROM structs.
+  # Struct classes have names but at the same time they're anonymous,
+  # i.e. you can't get the User struct class with ROM::Struct::User.
+  # ROM will create as many struct classes for User as needed,
   # they all will have the same name and ROM::Struct::User will be the common parent class for
   # them. Combined with the ability to provide your own namespace for structs this enables to
   # pre-define the parent class.
