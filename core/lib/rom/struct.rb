@@ -31,11 +31,14 @@ module ROM
   #       primary_key :id
   #       column :name, String
   #     end
+  #
+  #     conf.relation(:users) do
+  #       schema(infer: true)
+  #       auto_struct true
+  #     end
   #   end
   #
   #   class UserRepo < ROM::Repository[:users]
-  #     schema(infer: true)
-  #     auto_struct true
   #   end
   #
   #   user_repo = UserRepo.new(rom)
