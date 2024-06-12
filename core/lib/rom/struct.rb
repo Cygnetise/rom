@@ -50,10 +50,10 @@ module ROM
   #   # see struct's schema attributes
   #
   #   model.schema.key(:id)
-  #   # => #<Dry::Types[id: Nominal<Integer meta={primary_key: true, alias: nil, source: :users}>]>
+  #   # => #<Dry::Types[id: Nominal<Integer meta={primary_key: true, source: :users}>]>
   #
   #   model.schema[:name]
-  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String meta={alias: nil, source: :users}> meta={alias: nil, source: :users}>]>
+  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String meta={source: :users}> meta={source: :users}>]>
   #
   # @example passing a namespace with an existing parent class
   #   module Entities
