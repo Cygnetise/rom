@@ -15,9 +15,10 @@ module ROM
   # about attribute types returned from relations, thus can be introspected to build
   # additional functionality when desired.
   #
-  # There is a caveat you should know about when working with structs. Struct classes
-  # have names but at the same time they're anonymous, i.e. you can't get the User struct class
-  # with ROM::Struct::User. ROM will create as many struct classes for User as needed,
+  # *NOTE*: There is a caveat you should know about when working with ROM structs.
+  # Struct classes have names but at the same time they're anonymous,
+  # i.e. you can't get the User struct class with ROM::Struct::User.
+  # ROM will create as many struct classes for User as needed,
   # they all will have the same name and ROM::Struct::User will be the common parent class for
   # them. Combined with the ability to provide your own namespace for structs this enables to
   # pre-define the parent class.
@@ -27,6 +28,11 @@ module ROM
   #     conf.default.create_table(:users) do
   #       primary_key :id
   #       column :name, String
+  #     end
+  #
+  #     conf.relation(:users) do
+  #       schema(infer: true)
+  #       auto_struct true
   #     end
   #   end
   #
@@ -41,11 +47,11 @@ module ROM
   #
   #   # see struct's schema attributes
   #
-  #   # model.schema.key(:id)
+  #   model.schema.key(:id)
   #   # => #<Dry::Types[id: Nominal<Integer meta={primary_key: true, source: :users}>]>
   #
   #   model.schema[:name]
-  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String> meta={source: :users}>]>
+  #   # => #<Dry::Types[name: Sum<Nominal<NilClass> | Nominal<String meta={source: :users}> meta={source: :users}>]>
   #
   # @example passing a namespace with an existing parent class
   #   module Entities
@@ -61,6 +67,7 @@ module ROM
   #   end
   #
   #   user_repo = UserRepo.new(rom)
+  #   user_repo.users.insert(name: "Jane")
   #   user = user_repo.users.by_pk(1).one!
   #   user.name # => "Jane"
   #   user.upcased_name # => "JANE"
