@@ -8,6 +8,19 @@ require "rom/support/inflector"
 module ROM
   class Finalize
     class FinalizeRelations
+
+      module BuildRelationReaders
+        def self.build(relations)
+          Module.new do
+            relations.each do |name|
+              define_method(name) do
+                __registry__[name]
+              end
+            end
+          end
+        end
+      end
+
       attr_reader :notifications
 
       attr_reader :inflector
@@ -34,6 +47,7 @@ module ROM
       # @api private
       def run!
         relation_registry = RelationRegistry.new do |registry, relations|
+          relation_readers_module = BuildRelationReaders.build(relation_names)
           @relation_classes.each do |klass|
             unless klass.adapter
               raise MissingAdapterIdentifierError,
@@ -47,7 +61,7 @@ module ROM
                     "Relation with name #{key.inspect} registered more than once"
             end
 
-            klass.use(:registry_reader, relations: relation_names)
+            klass.use(:registry_reader, klass: klass, relation_readers_module: relation_readers_module)
 
             notifications.trigger("configuration.relations.class.ready", relation: klass, adapter: klass.adapter)
 
